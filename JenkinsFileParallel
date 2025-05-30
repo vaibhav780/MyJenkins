@@ -14,26 +14,14 @@ pipeline {
         stage('Unit tests') {
             steps {
                 parallel {
-                    stage('Unit tests - module 1') {
+                    stage('Unit tests - Chrome') {
                         steps {
-                            parallel {
-                                stage('Unit tests - on chrome') {
-                                    steps {
-                                        bat 'echo Running unit tests for Chrome'
-                                    }
-                                }
-                                stage('Unit tests - Firefox') {
-                                    steps {
-                                        bat 'echo Running unit tests for firefox'
-                                    }
-                                }
-                            }
-                            bat 'echo Running unit tests for module 1'
+                            bat 'echo Running unit tests for Chrome'
                         }
                     }
-                    stage('Unit tests - module 2') {
+                    stage('Unit tests - Firefox') {
                         steps {
-                            bat 'echo Running unit tests for module 2'
+                            bat 'echo Running unit tests for Firefox'
                         }
                     }
                 }
