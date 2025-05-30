@@ -13,18 +13,6 @@ pipeline {
         }
         stage('Unit tests') {
             steps {
-                parallel {
-                    stage('Unit tests - Chrome') {
-                        steps {
-                            bat 'echo Running unit tests for Chrome'
-                        }
-                    }
-                    stage('Unit tests - Firefox') {
-                        steps {
-                            bat 'echo Running unit tests for Firefox'
-                        }
-                    }
-                }
                 bat 'echo Running unit tests'
             }
         }
@@ -34,6 +22,24 @@ pipeline {
             }
         }
         stage('Regression tests') {
+            parallel{
+                stage('Chrome'){
+                    steps {
+                        bat 'echo Running regression tests on Chrome'
+                    }
+                }
+                stage('Firefox'){
+                    steps {
+                        bat 'echo Running regression tests on Firefox'
+                    }
+                }
+                stage('Edge'){
+                    steps {
+                        bat 'echo Running regression tests on Edge'
+                    }
+                }
+            }
+
             steps {
                 bat 'echo Running E2E tests'
             }
