@@ -1,0 +1,18 @@
+pipeline{
+    agent any
+    environment {
+        DOCKER_IMAGE = 'my-docker-image:latest'
+    }
+    stages{
+        stage('Build'){
+            steps{
+                echo 'deplouying docker image'${DOCKER_IMAGE}
+            }
+        }
+        stage('Test'){
+            steps{
+                echo 'running tests on docker image'${DOCKER_IMAGE}
+            }
+        }
+    }
+}
