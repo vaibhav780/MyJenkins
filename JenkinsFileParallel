@@ -1,3 +1,4 @@
+
 pipeline {
     agent any
     stages {
@@ -22,26 +23,22 @@ pipeline {
             }
         }
         stage('Regression tests') {
-            parallel{
-                stage('Chrome'){
+            parallel {
+                stage ('chrome') {
                     steps {
-                        bat 'echo Running regression tests on Chrome'
+                        bat 'echo Running E2E tests on chrome'
                     }
                 }
-                stage('Firefox'){
+                stage ('firefox') {
                     steps {
-                        bat 'echo Running regression tests on Firefox'
+                        bat 'echo Running E2E tests on firefox'
                     }
                 }
-                stage('Edge'){
+                stage ('safari') {
                     steps {
-                        bat 'echo Running regression tests on Edge'
+                        bat 'echo Running E2E tests on safari'
                     }
-                }
-            }
-
-            steps {
-                bat 'echo Running E2E tests'
+                }   
             }
         }
         stage('Release to prod') {
