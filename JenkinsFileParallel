@@ -1,0 +1,64 @@
+pipeline {
+    agent any
+    stages {
+        stage('pre -build') {
+            steps {
+                bat 'echo Pre-build'
+            }
+        }
+        stage('build') {
+            steps {
+                bat 'echo Build in progress.'
+            }
+        }
+        stage('Unit tests') {
+            steps {
+                parallel {
+                    stage('Unit tests - module 1') {
+                        steps {
+                            parallel {
+                                stage('Unit tests - on chrome') {
+                                    steps {
+                                        bat 'echo Running unit tests for Chrome'
+                                    }
+                                }
+                                stage('Unit tests - Firefox') {
+                                    steps {
+                                        bat 'echo Running unit tests for firefox'
+                                    }
+                                }
+                            }
+                            bat 'echo Running unit tests for module 1'
+                        }
+                    }
+                    stage('Unit tests - module 2') {
+                        steps {
+                            bat 'echo Running unit tests for module 2'
+                        }
+                    }
+                }
+                bat 'echo Running unit tests'
+            }
+        }
+        stage('deploy') {
+            steps {
+                bat 'echo Deploying build'
+            }
+        }
+        stage('Regression tests') {
+            steps {
+                bat 'echo Running E2E tests'
+            }
+        }
+        stage('Release to prod') {
+            steps {
+                bat 'echo Releasing to prod'
+            }
+        }
+    }
+ post {
+        always {
+            echo 'Cleanup after everything!'
+        }
+    }
+}
