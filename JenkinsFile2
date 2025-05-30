@@ -1,0 +1,27 @@
+pipeline{
+    agent any
+    stages{
+        stage('Build'){
+            steps{
+                bat 'java -version'
+                }
+        }
+    }
+    post{
+        always{
+            echo 'always'
+        }
+        success{
+            echo 'success'
+        }
+        failure{
+            echo 'failure'
+        }
+        unstable{
+            echo 'unstable'
+        }
+        changed{
+            echo 'changed'
+        }
+    }
+}
